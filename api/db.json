@@ -1,0 +1,85 @@
+{
+  "beers": [
+    {
+      "id": "1",
+      "name": "Skol Pilsen",
+      "description": "A light and refreshing beer, with low bitterness and a gentle touch of malt, perfect for any occasion."
+    },
+    {
+      "id": "2",
+      "name": "Brahma Chopp",
+      "description": "A light-colored beer with a balanced flavor, Brahma Chopp is known for its unparalleled drinkability."
+    },
+    {
+      "id": "3",
+      "name": "Antarctica Original",
+      "description": "Stands out for its striking flavor that's just right and a creamy consistency, setting the standard for premium beer."
+    },
+    {
+      "id": "4",
+      "name": "Bohemia Pilsen",
+      "description": "One of Brazil's first beers, it has a balanced flavor between malt and hops, with a charming golden color."
+    },
+    {
+      "id": "5",
+      "name": "Beck's",
+      "description": "A German Pilsen type beer, characterized by its pronounced and refreshing flavor, with a distinct bitterness."
+    },
+    {
+      "id": "6",
+      "name": "Leffe Blonde",
+      "description": "A Belgian abbey beer with notes of vanilla and clove, full-bodied with a deep golden color."
+    },
+    {
+      "id": "7",
+      "name": "Stella Artois",
+      "description": "Elegant and sophisticated, this lager beer has a rich European tradition, offering a pure flavor with a delicate malt note."
+    },
+    {
+      "id": "8",
+      "name": "Colorado Appia",
+      "description": "Combining honey and barley malt, this beer has a gently sweet flavor, complemented by a creamy texture."
+    },
+    {
+      "id": "9",
+      "name": "Wäls Brut",
+      "description": "Traditional bottle fermentation method, reminiscent of champagne production, resulting in a complex and effervescent beer."
+    },
+    {
+      "id": "10",
+      "name": "Serramalte",
+      "description": "A fuller-bodied beer with double malt, offering a robust flavor that is both smooth and striking."
+    },
+    {
+      "id": "11",
+      "name": "Budweiser",
+      "description": "Known worldwide, this lager is smooth, with a slightly malted flavor and a clean, fresh finish."
+    },
+    {
+      "id": "12",
+      "name": "Corona Extra",
+      "description": "A light and refreshing lager, often served with a lime to enhance its mild citrus flavor."
+    },
+    {
+      "id": "13",
+      "name": "Patagonia Amber Lager",
+      "description": "An amber-colored beer, with a rich malt flavor and light caramel touches, perfect for those who enjoy a more robust lager."
+    },
+    {
+      "id": "14",
+      "name": "Nossa",
+      "description": "Made with manioc from family farming, this beer is light and refreshing, ideal for the tropical climate."
+    },
+    {
+      "id": "15",
+      "name": "Hoegaarden",
+      "description": "The famous Belgian witbier, with hints of coriander and orange peel, offering a mild flavor and a delicate aroma."
+    },
+    {
+      "id": "16",
+      "name": "Franziskaner Weissbier",
+      "description": "A German wheat beer, with nuances of banana and clove, features a dense foam and a complex, refreshing taste."
+    }
+  ]
+}
+

@@ -20,9 +20,9 @@ export class CartService {
 
     if (existingItem) {
       existingItem.quantity += item.quantity;
-      this._cartBS.next([...currentItems]);
-    } else {
       this._cartBS.next([...currentItems, item]);
+    } else {
+      this._cartBS.next([...currentItems]);
     }
   };
 

@@ -1,14 +1,33 @@
 @use '../../styles/button/button.scss';
 
 .page {
-  background-color: #fdfef0;
   padding: 120px;
+
+  @media (max-width: 1200px) {
+    padding: 80px;
+  }
+
+  @media (max-width: 800px) {
+    padding: 40px;
+  }
+
+  @media (max-width: 500px) {
+    padding: 20px;
+  }
+
+  .loading-spinner {
+    margin: 0 auto;
+  }
 
   &-title {
     font-size: 48px;
     font-weight: 700;
     line-height: 57.6px;
     margin-bottom: 32px;
+
+    @media (max-width: 480px) {
+      margin-top: 120px;
+    }
   }
 
   &-subtitle {
@@ -20,48 +39,52 @@
   }
 }
 
-.product-filter-container {
+.product-filter {
   display: flex;
   justify-content: flex-end;
   gap: 16px;
 }
 
 .product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 0 auto;
-  gap: 19px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Creates as many 300px columns as can fit */
+  gap: 30px;
+  align-items: stretch;
 
-  &-item {
-    flex: 0 1 calc(25% - 20px);
-    padding: 35px 42px;
+  &__item {
+    padding: 16px 16px;
     box-shadow: 0px 8px 26px 0px #0000000d;
     border-radius: 16px;
 
-    &-button {
+    &--actions {
+      margin: auto;
+    }
+
+    &--button {
       @extend .button;
     }
 
-    &-image {
+    &--image {
       width: 100%;
+      aspect-ratio: 1 / 1;
     }
 
-    &-title,
-    &-price {
+    &--title,
+    &--price {
       font-size: 20px;
       font-weight: 700;
       color: #b35b00;
+      margin-top: 12px;
       margin-bottom: 7px;
     }
 
-    &-price,
-    &-description {
+    &--price,
+    &--description {
       margin-bottom: 28px;
     }
 
-    &-rating,
-    &-popularity {
+    &--rating,
+    &--popularity {
       display: flex;
       align-items: center;
       gap: 4px;
@@ -72,25 +95,10 @@
       }
     }
 
-    &-description {
+    &--description {
       font-size: 16px;
       line-height: 19.2px;
       color: #6c757d;
-    }
-
-    @media (max-width: 1200px) {
-      flex: 0 1 calc(33.333% - 20px);
-    }
-
-    // Responsive adjustments
-    @media (max-width: 800px) {
-      // When the screen size is 800px or less
-      flex: 0 1 calc(50% - 20px); // Two items per row
-    }
-
-    @media (max-width: 500px) {
-      // When the screen size is 500px or less
-      flex: 0 1 calc(100% - 20px); // One item per row
     }
   }
 }

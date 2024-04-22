@@ -1,16 +1,7 @@
 @use '../../styles/button/button.scss';
 
-$font-stack: Arial, sans-serif;
 $primary-color: #ffc80d;
 $link-color: #8e520e;
-$hover-color: darken($link-color, 10%);
-
-// Mixin for Flexbox Layout
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 .logo {
   font-size: 16px;
@@ -24,9 +15,11 @@ $hover-color: darken($link-color, 10%);
   height: 72px;
   color: #8e520e;
   gap: 16px;
-  @include flex-center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  &-cart-button {
+  &__cart-button {
     @extend .button;
   }
 
@@ -34,7 +27,7 @@ $hover-color: darken($link-color, 10%);
     width: 70%;
     position: relative;
 
-    &-bar {
+    &__bar {
       border-radius: 8px;
       width: 100%;
       height: 55px;
@@ -55,7 +48,7 @@ $hover-color: darken($link-color, 10%);
       }
     }
 
-    &-results {
+    &__results {
       position: absolute;
       top: 55px;
       width: 100%;
@@ -67,41 +60,6 @@ $hover-color: darken($link-color, 10%);
       border-top: 1px solid #eee;
       z-index: 1;
 
-      &-button {
-        margin-top: 16px;
-        @extend .button;
-      }
-
-      &-text {
-        display: flex;
-        flex-direction: column;
-      }
-
-      &-image {
-        width: 200px;
-        height: 200px;
-      }
-
-      &-title,
-      &-price {
-        font-size: 24px;
-        font-weight: 700;
-        color: #b35b00;
-      }
-
-      &-description {
-        margin: 16px 0;
-      }
-
-      &-item {
-        display: flex;
-        align-items: center;
-
-        &:not(:last-child) {
-          margin-bottom: 30px;
-        }
-      }
-
       li {
         list-style: none;
       }
@@ -109,6 +67,62 @@ $hover-color: darken($link-color, 10%);
 
     &::placeholder {
       color: #ced4da;
+    }
+  }
+
+  @media (max-width: 480px) {
+    & {
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+
+      &-search {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 72px;
+
+        &__results {
+          top: 54px;
+        }
+      }
+    }
+  }
+}
+
+.results {
+  &__button {
+    margin-top: 16px;
+    @extend .button;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__image {
+    width: 200px;
+    height: 200px;
+  }
+
+  &__title,
+  &__price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #b35b00;
+  }
+
+  &__description {
+    margin: 16px 0;
+  }
+
+  &__item {
+    display: grid;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
     }
   }
 }

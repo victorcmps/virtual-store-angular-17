@@ -18,6 +18,12 @@
     align-items: center;
   }
 
+  &__image {
+    @media (max-width: 500px) {
+      display: none;
+    }
+  }
+
   &__quantity {
     &-button {
       cursor: pointer;

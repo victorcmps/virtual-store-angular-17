@@ -3,67 +3,75 @@
     <h2 class="page-title">Choose your favorite beers</h2>
     <h3 class="page-subtitle">We have the best beers of the world just waiting for you!</h3>
 
-    <div class="product-filter-container">
-      <button
-        (click)="openFilterConfiguratorDialog()"
-        #tooltip="matTooltip"
-        matTooltip="Filter products"
-        mat-icon-button
-      >
-        <mat-icon> filter_alt </mat-icon>
-      </button>
-      <mat-form-field appearance="outline">
-        <mat-label>Sort products by</mat-label>
-        <mat-select [formControl]="sortByFormControl">
-          @for (sortType of sortByTypes; track sortType) {
-            <mat-option [value]="sortType.id">{{ sortType.viewValue }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+    @if (products().length) {
+      <div class="product-filter">
+        <button
+          (click)="openFilterConfiguratorDialog()"
+          #tooltip="matTooltip"
+          matTooltip="Filter products"
+          mat-icon-button
+        >
+          <mat-icon> filter_alt </mat-icon>
+        </button>
+        <mat-form-field appearance="outline">
+          <mat-label>Sort products by</mat-label>
+          <mat-select [formControl]="sortByFormControl">
+            @for (sortType of sortByTypes; track sortType) {
+              <mat-option [value]="sortType.id">{{ sortType.viewValue }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Order by</mat-label>
-        <mat-select [formControl]="orderByFormControl">
-          @for (orderType of orderByTypes; track orderType) {
-            <mat-option [value]="orderType.id">{{ orderType.viewValue }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Order by</mat-label>
+          <mat-select [formControl]="orderByFormControl">
+            @for (orderType of orderByTypes; track orderType) {
+              <mat-option [value]="orderType.id">{{ orderType.viewValue }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-    <div class="product-list">
-      @for (product of products(); track product) {
-        <mat-card class="product-list-item">
-          <img class="product-list-item-image" [alt]="product.name" [src]="product.image" />
-          <h3 class="product-list-item-title">{{ product.name }}</h3>
-          <p class="product-list-item-description">{{ product.description }}</p>
-          <p class="product-list-item-rating">
-            Rating:
+      <div class="product-list">
+        @for (product of products(); track product) {
+          <mat-card class="product-list__item">
+            <mat-card-content>
+              <img class="product-list__item--image" [alt]="product.name" [src]="product.image" />
+              <h3 class="product-list__item--title">{{ product.name }}</h3>
+              <p class="product-list__item--description">{{ product.description }}</p>
+              <p class="product-list__item--rating">
+                Rating:
 
-            <ng-container *ngFor="let i of [].constructor(5); let index = index">
-              <mat-icon>{{ index < product.rating ? 'star' : 'star_outline' }}</mat-icon>
-            </ng-container>
-          </p>
-          <p class="product-list-item-popularity">
-            Popularity:
+                <ng-container *ngFor="let i of [].constructor(5); let index = index">
+                  <mat-icon>{{ index < product.rating ? 'star' : 'star_outline' }}</mat-icon>
+                </ng-container>
+              </p>
+              <p class="product-list__item--popularity">
+                Popularity:
 
-            <ng-container *ngFor="let i of [].constructor(5); let index = index">
-              <mat-icon>{{ index < product.popularity ? 'star' : 'star_outline' }}</mat-icon>
-            </ng-container>
-          </p>
-          <p class="product-list-item-price">{{ product.price | currency }}</p>
+                <ng-container *ngFor="let i of [].constructor(5); let index = index">
+                  <mat-icon>{{ index < product.popularity ? 'star' : 'star_outline' }}</mat-icon>
+                </ng-container>
+              </p>
+              <p class="product-list__item--price">{{ product.price | currency }}</p>
+            </mat-card-content>
 
-          <button
-            (click)="addToCart(product)"
-            disableRipple
-            class="product-list-item-button button-primary"
-            mat-flat-button
-          >
-            <mat-icon>shopping_cart </mat-icon>
-            Add to Cart
-          </button>
-        </mat-card>
-      }
-    </div>
+            <mat-card-actions class="product-list__item--actions">
+              <button
+                (click)="addToCart(product)"
+                disableRipple
+                class="product-list__item--button button-primary"
+                mat-flat-button
+              >
+                <mat-icon>shopping_cart </mat-icon>
+                Add to Cart
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        }
+      </div>
+    } @else {
+      <mat-spinner class="loading-spinner"></mat-spinner>
+    }
   </div>
 </div>

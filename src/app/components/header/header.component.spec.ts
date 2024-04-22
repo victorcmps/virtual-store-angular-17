@@ -94,7 +94,7 @@ describe('HeaderComponent', () => {
     it('should set showSearchBar to true if event target is inside searchBarElement', () => {
       // Arrange
       const event: any = new MouseEvent('click');
-      const searchBarElement = fixture.debugElement.query(By.css('.nav-header-search-bar'));
+      const searchBarElement = fixture.debugElement.query(By.css('.nav-header-search__bar'));
       component.searchBarElement = searchBarElement;
 
       // Simulate event target inside searchBarElement
@@ -110,7 +110,7 @@ describe('HeaderComponent', () => {
     it('should set showSearchBar to false if event target is outside searchBarElement', () => {
       // Arrange
       const event: any = new MouseEvent('click');
-      const searchBarElement = fixture.debugElement.query(By.css('.nav-header-search-bar'));
+      const searchBarElement = fixture.debugElement.query(By.css('.nav-header-search__bar'));
       component.searchBarElement = searchBarElement;
 
       // Simulate event target outside searchBarElement

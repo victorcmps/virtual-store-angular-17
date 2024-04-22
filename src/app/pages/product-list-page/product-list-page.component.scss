@@ -23,6 +23,7 @@
 .product-filter-container {
   display: flex;
   justify-content: flex-end;
+  gap: 16px;
 }
 
 .product-list {
@@ -54,8 +55,21 @@
       margin-bottom: 7px;
     }
 
-    &-price, &-description {
+    &-price,
+    &-description {
       margin-bottom: 28px;
+    }
+
+    &-rating,
+    &-popularity {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 28px;
+
+      mat-icon {
+        color: #ffc80d;
+      }
     }
 
     &-description {

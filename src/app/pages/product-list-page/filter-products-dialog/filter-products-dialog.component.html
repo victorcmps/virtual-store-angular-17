@@ -1,14 +1,101 @@
 <h2 mat-dialog-title>Filter products</h2>
 
-<form [formGroup]="formGroup">
-  <mat-label>Filter by price</mat-label>
-  <mat-slider min="0" max="100" discrete>
-    <input formControlName="minPrice" value="0" matSliderStartThumb />
-    <input formControlName="maxPrice" value="100" matSliderEndThumb />
-  </mat-slider>
-</form>
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <mat-label>Filter by price</mat-label>
+    <div class="filter-by-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Min price</mat-label>
+        <mat-icon matPrefix>attach_money</mat-icon>
+        <input matInput inputmode="numeric" mask="separator.2" thousandSeparator="." [dropSpecialCharacters]="true" type="text" formControlName="minPrice" placeholder="Min price" />
+        <mat-error
+          ><ng-container
+            *ngTemplateOutlet="validation; context: { property: 'minPrice', minValue: 0, maxValue: 100 }"
+          ></ng-container
+        ></mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Max price</mat-label>
+        <mat-icon matPrefix>attach_money</mat-icon>
+        <input matInput inputmode="numeric" type="text" mask="separator.2" thousandSeparator="." [dropSpecialCharacters]="true" formControlName="maxPrice" placeholder="Max price" />
+        <mat-error
+          ><ng-container
+            *ngTemplateOutlet="validation; context: { property: 'maxPrice', minValue: 0, maxValue: 100 }"
+          ></ng-container
+        ></mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-label>Filter by popularity</mat-label>
+    <div class="filter-by-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Min popularity</mat-label>
+        <mat-icon matPrefix>star_alt</mat-icon>
+        <input matInput inputmode="numeric" type="text" mask="0" formControlName="minPopularity" placeholder="Min popularity" />
+        <mat-error
+          ><ng-container
+            *ngTemplateOutlet="validation; context: { property: 'minPopularity', minValue: 0, maxValue: 5 }"
+          ></ng-container
+        ></mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Max popularity</mat-label>
+        <mat-icon matPrefix>star_alt</mat-icon>
+        <input matInput inputmode="numeric" type="text" mask="0" formControlName="maxPopularity" placeholder="Max popularity" />
+        <mat-error
+          ><ng-container
+            *ngTemplateOutlet="validation; context: { property: 'maxPopularity', minValue: 0, maxValue: 5 }"
+          ></ng-container
+        ></mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-label>Filter by rating</mat-label>
+    <div class="filter-by-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Min rating</mat-label>
+        <mat-icon matPrefix>star_alt</mat-icon>
+        <input matInput inputmode="numeric" type="text" mask="0" formControlName="minRating" placeholder="Min rating" />
+        <mat-error
+          ><ng-container
+            *ngTemplateOutlet="validation; context: { property: 'minRating', minValue: 0, maxValue: 5 }"
+          ></ng-container
+        ></mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Max rating</mat-label>
+        <mat-icon matPrefix>star_alt</mat-icon>
+        <input matInput inputmode="numeric" type="text" mask="0" formControlName="maxRating" placeholder="Max rating" />
+        <mat-error
+          ><ng-container
+            *ngTemplateOutlet="validation; context: { property: 'maxRating', minValue: 0, maxValue: 5 }"
+          ></ng-container
+        ></mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Save</button>
+  <button (click)="cleanAllFilters()" mat-button>Clean filters</button>
+  <button
+    [disabled]="!formGroup.dirty || formGroup.invalid"
+    (click)="saveFilter()"
+    mat-button
+    mat-flat-button
+    color="primary"
+  >
+    Save
+  </button>
 </mat-dialog-actions>
+
+<ng-template #validation let-property="property" let-minValue="minValue" let-maxValue="maxValue">
+  @if (formGroup.controls[property] && formGroup.controls[property].hasError('min')) {
+    Must be greater than or equal to {{ minValue }}
+  }
+
+  @if (formGroup.controls[property] && formGroup.controls[property].hasError('max')) {
+    Must be less than or equal to {{ maxValue }}
+  }
+</ng-template>

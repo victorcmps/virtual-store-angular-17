@@ -1,0 +1,9 @@
+.filter-by-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+
+  mat-form-field {
+    flex: 1;
+  }
+}

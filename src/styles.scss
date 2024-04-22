@@ -12,8 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$virtual-store-primary: mat.define-palette(mat.$indigo-palette);
-$virtual-store-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$virtual-store-primary: mat.define-palette(mat.$amber-palette);
+$virtual-store-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $virtual-store-warn: mat.define-palette(mat.$red-palette);

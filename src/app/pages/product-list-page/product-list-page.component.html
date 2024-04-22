@@ -12,7 +12,7 @@
       >
         <mat-icon> filter_alt </mat-icon>
       </button>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Sort products by</mat-label>
         <mat-select [formControl]="sortByFormControl">
           @for (sortType of sortByTypes; track sortType) {
@@ -21,11 +21,12 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Order by</mat-label>
         <mat-select [formControl]="orderByFormControl">
-          <mat-option value="asc">Ascending</mat-option>
-          <mat-option value="desc">Descending</mat-option>
+          @for (orderType of orderByTypes; track orderType) {
+            <mat-option [value]="orderType.id">{{ orderType.viewValue }}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </div>
@@ -36,7 +37,22 @@
           <img class="product-list-item-image" [alt]="product.name" [src]="product.image" />
           <h3 class="product-list-item-title">{{ product.name }}</h3>
           <p class="product-list-item-description">{{ product.description }}</p>
+          <p class="product-list-item-rating">
+            Rating:
+
+            <ng-container *ngFor="let i of [].constructor(5); let index = index">
+              <mat-icon>{{ index < product.rating ? 'star' : 'star_outline' }}</mat-icon>
+            </ng-container>
+          </p>
+          <p class="product-list-item-popularity">
+            Popularity:
+
+            <ng-container *ngFor="let i of [].constructor(5); let index = index">
+              <mat-icon>{{ index < product.popularity ? 'star' : 'star_outline' }}</mat-icon>
+            </ng-container>
+          </p>
           <p class="product-list-item-price">{{ product.price | currency }}</p>
+
           <button
             (click)="addToCart(product)"
             disableRipple

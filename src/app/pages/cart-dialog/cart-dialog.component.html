@@ -1,0 +1,62 @@
+<div class="cart">
+  <h2 mat-dialog-title>Cart</h2>
+
+  <mat-dialog-content>
+    @if (cart().length < 1) {
+      <p>The cart is empty.</p>
+    }
+
+    @for (item of cart(); track item) {
+      <div class="cart-item">
+        <div class="cart-item__left">
+          <div class="cart-item__image">
+            <img width="200" [alt]="item.name" [src]="item.image" />
+          </div>
+          <div class="cart-item__info">
+            <h3 class="cart-item__title">{{ item.name }}</h3>
+
+            <div class="cart-item__quantity">
+              <p>Quantity:</p>
+              <div class="cart-item__quantity-controls">
+                <button
+                  [disabled]="item.quantity < 2"
+                  mat-icon-button
+                  (click)="removeQuantity(item.id)"
+                  #tooltip="matTooltip"
+                  matTooltip="Remove quantity to product"
+                >
+                  <mat-icon> remove_circle </mat-icon>
+                </button>
+                <span>{{ item.quantity }}</span>
+                <button
+                  #tooltip="matTooltip"
+                  matTooltip="Add quantity to product"
+                  mat-icon-button
+                  (click)="addQuantity(item.id)"
+                >
+                  <mat-icon> add_circle </mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <span>
+              <p>Price:</p>
+              {{ item.price * item.quantity | currency }}
+            </span>
+          </div>
+        </div>
+
+        <button mat-icon-button (click)="removeProduct(item.id)" #tooltip="matTooltip" matTooltip="Remove product">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button class="button-primary" mat-button mat-dialog-close>
+      <mat-icon> cancel </mat-icon>
+      Close
+    </button>
+  </mat-dialog-actions>
+</div>

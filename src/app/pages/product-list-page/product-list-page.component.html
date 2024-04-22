@@ -1,1 +1,53 @@
-<p>product-list-page works!</p>
+<div class="page">
+  <div class="container">
+    <h2 class="page-title">Choose your favorite beers</h2>
+    <h3 class="page-subtitle">We have the best beers of the world just waiting for you!</h3>
+
+    <div class="product-filter-container">
+      <button
+        (click)="openFilterConfiguratorDialog()"
+        #tooltip="matTooltip"
+        matTooltip="Filter products"
+        mat-icon-button
+      >
+        <mat-icon> filter_alt </mat-icon>
+      </button>
+      <mat-form-field>
+        <mat-label>Sort products by</mat-label>
+        <mat-select [formControl]="sortByFormControl">
+          @for (sortType of sortByTypes; track sortType) {
+            <mat-option [value]="sortType.id">{{ sortType.viewValue }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Order by</mat-label>
+        <mat-select [formControl]="orderByFormControl">
+          <mat-option value="asc">Ascending</mat-option>
+          <mat-option value="desc">Descending</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="product-list">
+      @for (product of products(); track product) {
+        <mat-card class="product-list-item">
+          <img class="product-list-item-image" [alt]="product.name" [src]="product.image" />
+          <h3 class="product-list-item-title">{{ product.name }}</h3>
+          <p class="product-list-item-description">{{ product.description }}</p>
+          <p class="product-list-item-price">{{ product.price | currency }}</p>
+          <button
+            (click)="addToCart(product)"
+            disableRipple
+            class="product-list-item-button button-primary"
+            mat-flat-button
+          >
+            <mat-icon>shopping_cart </mat-icon>
+            Add to Cart
+          </button>
+        </mat-card>
+      }
+    </div>
+  </div>
+</div>

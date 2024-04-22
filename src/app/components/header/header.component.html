@@ -1,1 +1,55 @@
-<p>header works!</p>
+<header class="nav-header">
+  <h1 class="logo">MyBeers</h1>
+
+  <div class="nav-header-search" #searchBar>
+    <input
+      [formControl]="searchBarFormControl"
+      [ngClass]="{ 'active': showSearchBar }"
+      class="nav-header-search-bar"
+      placeholder="Search for the best beers!"
+    />
+    @if (showSearchBar) {
+      <mat-card class="nav-header-search-results">
+        <ul>
+          @if (isLoading) {
+            <li>Loading...</li>
+          }
+
+          @if (searchBarFormControl.value.length < 3 && !isLoading) {
+            <li>Type more {{ MIN_CHARACTERS_TO_SEARCH - this.searchBarFormControl.value.length }} characters</li>
+          }
+
+          @if (searchBarFormControl.value.length >= 3 && !isLoading) {
+            @for (item of filteredItems(); track item) {
+              <li class="nav-header-search-results-item">
+                <img class="nav-header-search-results-image" [alt]="item.name" [src]="item.image" />
+                <span class="nav-header-search-results-text">
+                  <h2 class="nav-header-search-results-title">{{ item.name }}</h2>
+                  <p class="nav-header-search-results-description">{{ item.description }}</p>
+                  <button
+                    (click)="addToCart(item)"
+                    disableRipple
+                    class="nav-header-search-results-button button-primary"
+                    mat-flat-button
+                  >
+                    <mat-icon>shopping_cart </mat-icon>
+                    Add to Cart
+                  </button>
+                </span>
+              </li>
+            }
+          }
+
+          @if (searchBarFormControl.value.length >= 3 && filteredItems().length === 0 && !isLoading) {
+            <li>No options match {{ searchBarFormControl.value }}</li>
+          }
+        </ul>
+      </mat-card>
+    }
+  </div>
+
+  <button (click)="openCart()" disableRipple class="nav-header-cart-button button-secondary" mat-flat-button>
+    <mat-icon>shopping_cart </mat-icon>
+    Cart
+  </button>
+</header>

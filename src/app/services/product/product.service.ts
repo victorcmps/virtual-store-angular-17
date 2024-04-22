@@ -8,10 +8,10 @@ import { ProductModel } from '../../models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  public readonly products$: Observable<ProductModel | null>;
+  public readonly products$: Observable<ProductModel[] | null>;
 
   public constructor(private readonly http: HttpClient) {
-    this.products$ = this.http.get<ProductModel>('/beers').pipe(catchError(this.handleGetProductsError));
+    this.products$ = this.http.get<ProductModel[]>('beers').pipe(catchError(this.handleGetProductsError));
   }
 
   private readonly handleGetProductsError = (): Observable<null> => {

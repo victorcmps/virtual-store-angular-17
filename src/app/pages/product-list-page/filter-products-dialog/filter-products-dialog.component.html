@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Filter products</h2>
+
+<form [formGroup]="formGroup">
+  <mat-label>Filter by price</mat-label>
+  <mat-slider min="0" max="100" discrete>
+    <input formControlName="minPrice" value="0" matSliderStartThumb />
+    <input formControlName="maxPrice" value="100" matSliderEndThumb />
+  </mat-slider>
+</form>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Save</button>
+</mat-dialog-actions>

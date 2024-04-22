@@ -1,0 +1,32 @@
+.button {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0;
+  padding: 6px 21px;
+  border-radius: 8px;
+
+  &-primary {
+    &.mat-mdc-unelevated-button:not(:disabled) {
+      background-color: #ffc80d;
+      color: #a07c00;
+    }
+  }
+
+  &-secondary {
+    &.mat-mdc-unelevated-button:not(:disabled) {
+      background-color: #fd951e;
+      color: #8e520e;
+    }
+  }
+
+  &-ghost {
+    &.mat-mdc-unelevated-button:not(:disabled) {
+      background-color: transparent;
+      color: #000000;
+    }
+  }
+
+  mat-icon {
+    font-size: 22px;
+  }
+}

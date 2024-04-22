@@ -2,27 +2,29 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { CartItemModel } from '../../models/cart.model';
 import { Injectable } from '@angular/core';
+import { ProductModel } from '../../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   public readonly cart$: Observable<CartItemModel[]>;
-  private readonly _cartBS = new BehaviorSubject<CartItemModel[]>(new Array());
+  private readonly _cartBS = new BehaviorSubject<CartItemModel[]>([]);
 
   public constructor() {
     this.cart$ = this._cartBS.asObservable();
   }
 
-  public readonly addToCart = (item: CartItemModel): void => {
-    const currentItems = this._cartBS.value;
-    const existingItem = currentItems.find((i) => i.id === item.id);
+  public readonly addToCart = (item: ProductModel): void => {
+    const currentItems: CartItemModel[] = this._cartBS.value;
+    const existingItemIndex = currentItems.findIndex((i) => i.id === item.id);
 
-    if (existingItem) {
-      existingItem.quantity += item.quantity;
-      this._cartBS.next([...currentItems, item]);
+    if (existingItemIndex !== -1) {
+      currentItems[existingItemIndex].quantity++;
+      this._cartBS.next(currentItems);
     } else {
-      this._cartBS.next([...currentItems]);
+      const newItem = { ...item, quantity: 1 };
+      this._cartBS.next([...currentItems, newItem]);
     }
   };
 

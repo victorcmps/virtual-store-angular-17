@@ -1,0 +1,40 @@
+@use '../../styles/button/button.scss';
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
+
+  &__action {
+    @extend .button;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__quantity {
+    &-button {
+      cursor: pointer;
+    }
+
+    &-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+
+  &__title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 43.2px;
+    color: #b35b00;
+    margin-bottom: 16px;
+  }
+}

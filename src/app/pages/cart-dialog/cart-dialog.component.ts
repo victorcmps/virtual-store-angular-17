@@ -1,11 +1,11 @@
 import { Component, WritableSignal, signal } from '@angular/core';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CartItemModel } from '../../models/cart.model';
 import { CartService } from '../../services/cart/cart.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-cart-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatIconModule, MatButtonModule, MatSnackBarModule, MatTooltipModule],
+  imports: [CommonModule, MatDialogModule, MatIconModule, MatButtonModule, MatSnackBarModule, MatTooltipModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
   templateUrl: './cart-dialog.component.html',
   styleUrl: './cart-dialog.component.scss'
 })
@@ -22,6 +22,7 @@ export class CartDialogComponent {
   private readonly subscription: Subscription = new Subscription();
 
   public constructor(
+    public dialogRef: MatDialogRef<CartDialogComponent>,
     private readonly cartService: CartService,
     private readonly snackBar: MatSnackBar
   ) {

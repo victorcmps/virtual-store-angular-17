@@ -73,9 +73,9 @@ export class ProductListPageComponent implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   public constructor(
+    public readonly dialog: MatDialog,
+    public readonly snackBar: MatSnackBar,
     private readonly cartService: CartService,
-    private readonly dialog: MatDialog,
-    private readonly snackBar: MatSnackBar,
     private readonly productService: ProductService
   ) {
     this.subscription.add(

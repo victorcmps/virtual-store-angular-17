@@ -12,7 +12,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductModel } from '../../models/product.model';
 import { ProductService } from '../../services/product/product.service';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -21,10 +20,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MatButtonModule,
     MatIconModule,
-
     MatCardModule,
     ReactiveFormsModule,
-    RouterModule,
     MatDialogModule,
     MatSnackBarModule
   ],
@@ -53,9 +50,9 @@ export class HeaderComponent implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   public constructor(
+    public readonly dialog: MatDialog,
+    public readonly snackBar: MatSnackBar,
     private readonly cartService: CartService,
-    private readonly dialog: MatDialog,
-    private readonly snackBar: MatSnackBar,
     private readonly productService: ProductService
   ) {
     combineLatest([

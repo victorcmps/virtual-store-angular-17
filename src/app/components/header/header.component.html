@@ -26,6 +26,7 @@
                 <span class="nav-header-search-results-text">
                   <h2 class="nav-header-search-results-title">{{ item.name }}</h2>
                   <p class="nav-header-search-results-description">{{ item.description }}</p>
+                  <p class="nav-header-search-results-price">{{ item.price | currency }}</p>
                   <button
                     (click)="addToCart(item)"
                     disableRipple

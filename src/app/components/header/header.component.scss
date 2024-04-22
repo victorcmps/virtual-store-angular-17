@@ -29,7 +29,6 @@ $hover-color: darken($link-color, 10%);
   &-cart-button {
     @extend .button;
   }
-  
 
   &-search {
     width: 70%;
@@ -66,6 +65,7 @@ $hover-color: darken($link-color, 10%);
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       border-top: 1px solid #eee;
+      z-index: 1;
 
       &-button {
         margin-top: 16px;
@@ -82,20 +82,21 @@ $hover-color: darken($link-color, 10%);
         height: 200px;
       }
 
-      &-title {
+      &-title,
+      &-price {
         font-size: 24px;
         font-weight: 700;
         color: #b35b00;
       }
 
       &-description {
-        margin-top: 16px;
+        margin: 16px 0;
       }
 
       &-item {
         display: flex;
         align-items: center;
-        
+
         &:not(:last-child) {
           margin-bottom: 30px;
         }

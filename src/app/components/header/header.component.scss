@@ -118,7 +118,7 @@ $link-color: #8e520e;
   }
 
   &__item {
-    display: grid;
+    display: flex;
     align-items: center;
 
     &:not(:last-child) {

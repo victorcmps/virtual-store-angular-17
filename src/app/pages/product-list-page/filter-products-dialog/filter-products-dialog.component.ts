@@ -32,9 +32,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     MatSliderModule,
     NgxMaskDirective
   ],
-  providers: [
-    provideNgxMask()
-  ],
+  providers: [provideNgxMask()],
   styleUrls: ['./filter-products-dialog.component.scss']
 })
 export class FilterProductsDialogComponent {

@@ -131,7 +131,6 @@ export class ProductListPageComponent implements OnDestroy {
             );
           });
           this.products.set(filteredProducts);
-          this.snackBar.open('Products filtered.', 'Close', { duration: 3000 });
         }
       })
     );
@@ -143,7 +142,7 @@ export class ProductListPageComponent implements OnDestroy {
 
   public readonly openCart = (): void => {
     this.dialog.open(CartDialogComponent, {
-      width: '960px'
+      width: '480px'
     });
   };
 
@@ -162,7 +161,13 @@ export class ProductListPageComponent implements OnDestroy {
             this.filterFormControl.enable();
           }
 
+          if (Object.values(filterConfig).every((value) => value === null || value === '')) {
+            this.cleanAllFilters();
+            return;
+          }
+
           this.filterFormControl.setValue(filterConfig);
+          this.snackBar.open('Products filtered.', 'Close', { duration: 3000 });
         }
       });
   };
@@ -189,6 +194,7 @@ export class ProductListPageComponent implements OnDestroy {
     });
 
     this.filterFormControl.disable();
+    this.snackBar.open('Product filters have been reset to default.', 'Close', { duration: 3000 });
   };
 
   private readonly sortProducts = (a: ProductModel, b: ProductModel, sortBy: SortTypesEnum): number => {

@@ -45,7 +45,7 @@
         @for (product of products(); track product) {
           <mat-card class="product-list__item">
             <mat-card-content>
-              <img class="product-list__item--image" [alt]="product.name" [src]="product.image" />
+              <img class="product-list__item--image" [alt]="product.name" [src]="'./assets/images/' + product.image" />
               <h3 class="product-list__item--title">{{ product.name }}</h3>
               <p class="product-list__item--description">{{ product.description }}</p>
               <p class="product-list__item--rating">

@@ -22,7 +22,7 @@
           @if (searchBarFormControl.value.length >= 3 && !isLoading) {
             @for (item of filteredItems(); track item) {
               <li class="results__item">
-                <img class="results__image" [alt]="item.name" [src]="item.image" />
+                <img class="results__image" [alt]="item.name" [src]="'./assets/images/' + item.image" />
                 <span class="results__text">
                   <h2 class="results__title">{{ item.name }}</h2>
                   <p class="results__description">{{ item.description }}</p>

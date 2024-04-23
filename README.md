@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## JSON server
 
-Run `npm run server` for running the JSON server. The server will be available on `http://localhost:3000/`. The server will automatically reaload if you change the `db.json` file located in the `api` folder.
+Run `npm run server` for running the JSON server. The server will be available on `http://localhost:3000/`. The server will automatically reload if you change the `db.json` file located in the `api` folder.
 
 ## Development server
 

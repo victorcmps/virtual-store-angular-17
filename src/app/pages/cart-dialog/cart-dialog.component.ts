@@ -1,4 +1,4 @@
-import { Component, WritableSignal, signal } from '@angular/core';
+import { Component, WritableSignal, computed, signal } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 })
 export class CartDialogComponent {
   public readonly cart: WritableSignal<CartItemModel[]> = signal([]);
+  public readonly totalValue = computed(() => this.cart().reduce((acc, item) => acc + item.price * item.quantity, 0));
   private readonly subscription: Subscription = new Subscription();
 
   public constructor(

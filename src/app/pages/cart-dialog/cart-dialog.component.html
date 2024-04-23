@@ -8,13 +8,15 @@
 
     @for (item of cart(); track item) {
       <div class="cart-item">
-        <div class="cart-item__left">
-          <div class="cart-item__image">
-            <img width="200" [alt]="item.name" [src]="item.image" />
-          </div>
-          <div class="cart-item__info">
-            <h3 class="cart-item__title">{{ item.name }}</h3>
-
+        <div class="cart-item__image">
+          <img width="100" height="100" [alt]="item.name" [src]="'./assets/images/' + item.image" />
+        </div>
+        <div class="cart-item__info">
+          <h3 class="cart-item__title">{{ item.name }}</h3>
+          <p>
+            {{ item.price * item.quantity | currency }}
+          </p>
+          <div class="cart-item__actions">
             <div class="cart-item__quantity">
               <p>Quantity:</p>
               <div class="cart-item__quantity-controls">
@@ -38,11 +40,6 @@
                 </button>
               </div>
             </div>
-
-            <span>
-              <p>Price:</p>
-              {{ item.price * item.quantity | currency }}
-            </span>
           </div>
         </div>
 
@@ -51,6 +48,8 @@
         </button>
       </div>
     }
+
+    <p class="cart-total-amount">Total amount: {{ totalValue() | currency }}</p>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">

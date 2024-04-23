@@ -1,46 +1,57 @@
 @use '../../styles/button/button.scss';
 
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid #ddd;
-  }
-
-  &__action {
-    @extend .button;
-  }
-
-  &__left {
+.cart {
+  &-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-  }
 
-  &__image {
-    @media (max-width: 500px) {
-      display: none;
-    }
-  }
-
-  &__quantity {
-    &-button {
-      cursor: pointer;
+    &:not(:last-child) {
+      border-bottom: 1px solid #ddd;
     }
 
-    &-controls {
+    &__action {
+      @extend .button;
+    }
+
+    &__image {
       display: flex;
       align-items: center;
-      gap: 12px;
+
+      @media (max-width: 500px) {
+        display: none;
+      }
+    }
+
+    &__info {
+      margin: 24px 0 24px 24px;
+    }
+
+    &__quantity {
+      margin-top: 12px;
+      &-button {
+        cursor: pointer;
+      }
+
+      &-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #b35b00;
+      margin-bottom: 16px;
     }
   }
 
-  &__title {
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 43.2px;
+  &-total-amount {
+    font-size: 20px;
+    margin-top: 24px;
     color: #b35b00;
-    margin-bottom: 16px;
+    font-weight: 700;
   }
 }

@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
 
+## Installing Dependencies
+Run `npm install` or `npm i` for installing the project dependencies.
+
 ## JSON server
 
 Run `npm run server` for running the JSON server. The server will be available on `http://localhost:3000/`. The server will automatically reload if you change the `db.json` file located in the `api` folder.

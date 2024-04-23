@@ -152,7 +152,7 @@ describe('HeaderComponent', () => {
 
       // Assert
       expect(component.dialog.open).toHaveBeenCalledWith(CartDialogComponent, {
-        width: '960px'
+        width: '480px'
       });
     });
   });

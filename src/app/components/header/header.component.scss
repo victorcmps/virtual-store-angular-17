@@ -70,7 +70,7 @@ $link-color: #8e520e;
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 570px) {
     & {
       position: fixed;
       width: 100%;
@@ -83,7 +83,7 @@ $link-color: #8e520e;
         top: 72px;
 
         &__results {
-          top: 54px;
+          top: 53px;
         }
       }
     }
@@ -104,6 +104,10 @@ $link-color: #8e520e;
   &__image {
     width: 200px;
     height: 200px;
+
+    @media (max-width: 570px) {
+      display: none;
+    }
   }
 
   &__title,

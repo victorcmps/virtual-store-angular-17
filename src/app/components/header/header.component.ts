@@ -55,24 +55,26 @@ export class HeaderComponent implements OnDestroy {
     private readonly cartService: CartService,
     private readonly productService: ProductService
   ) {
-    combineLatest([
-      this.searchBarFormControl.valueChanges.pipe(filter((searchInput) => searchInput.length >= 3)),
-      this.productService.products$.pipe(
-        filter((value: ProductModel[]): boolean => !!value) as OperatorFunction<ProductModel[] | null, ProductModel[]>
-      )
-    ])
-      .pipe(
-        tap(() => (this.isLoading = true)),
-        debounceTime(300)
-      )
-      .subscribe(([searchInput, products]) => {
-        const filterItems = products.filter((product) =>
-          product.name.toLowerCase().includes(searchInput.toLowerCase())
-        );
+    this.subscription.add(
+      combineLatest([
+        this.searchBarFormControl.valueChanges.pipe(filter((searchInput) => searchInput.length >= 3)),
+        this.productService.products$.pipe(
+          filter((value: ProductModel[]): boolean => !!value) as OperatorFunction<ProductModel[] | null, ProductModel[]>
+        )
+      ])
+        .pipe(
+          tap(() => (this.isLoading = true)),
+          debounceTime(300)
+        )
+        .subscribe(([searchInput, products]) => {
+          const filterItems = products.filter((product) =>
+            product.name.toLowerCase().includes(searchInput.toLowerCase())
+          );
 
-        this.filteredItems.set(filterItems);
-        this.isLoading = false;
-      });
+          this.filteredItems.set(filterItems);
+          this.isLoading = false;
+        })
+    );
   }
 
   public ngOnDestroy(): void {
@@ -81,7 +83,7 @@ export class HeaderComponent implements OnDestroy {
 
   public readonly openCart = (): void => {
     this.dialog.open(CartDialogComponent, {
-      width: '960px'
+      width: '480px'
     });
   };
 

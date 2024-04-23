@@ -91,31 +91,4 @@ describe('FilterProductsDialogComponent', () => {
       expect(dialogRef.close).not.toHaveBeenCalled();
     });
   });
-
-  describe('cleanAllFilters', () => {
-    it('should reset form group and save filter', () => {
-      // Arrange
-      const dialogRef = TestBed.inject(MatDialogRef);
-      component.formGroup.setValue({
-        minPrice: 10,
-        maxPrice: 50,
-        minRating: 2,
-        maxRating: 4,
-        minPopularity: 1,
-        maxPopularity: 3
-      });
-
-      // Act
-      component.cleanAllFilters();
-
-      // Assert
-      expect(component.formGroup.get('minPrice')?.value).toBeNull();
-      expect(component.formGroup.get('maxPrice')?.value).toBeNull();
-      expect(component.formGroup.get('minRating')?.value).toBeNull();
-      expect(component.formGroup.get('maxRating')?.value).toBeNull();
-      expect(component.formGroup.get('minPopularity')?.value).toBeNull();
-      expect(component.formGroup.get('maxPopularity')?.value).toBeNull();
-      expect(dialogRef.close).toHaveBeenCalledWith(component.formGroup.value);
-    });
-  });
 });

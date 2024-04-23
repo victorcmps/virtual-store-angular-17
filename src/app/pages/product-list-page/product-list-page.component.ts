@@ -53,6 +53,7 @@ export class ProductListPageComponent implements OnDestroy {
     { id: OrderByTypesEnum.Descending, viewValue: 'Descending' }
   ];
 
+  public loading = true;
   public readonly products: WritableSignal<ProductModel[]> = signal([]);
   public readonly sortByFormControl: FormControl<SortTypesEnum> = new FormControl(SortTypesEnum.Popularity, {
     nonNullable: true
@@ -62,12 +63,15 @@ export class ProductListPageComponent implements OnDestroy {
   });
 
   public readonly filterFormControl: FormControl<FilterFormModel | null> = new FormControl({
-    minPrice: null,
-    maxPrice: null,
-    minRating: null,
-    maxRating: null,
-    minPopularity: null,
-    maxPopularity: null
+    value: {
+      minPrice: null,
+      maxPrice: null,
+      minRating: null,
+      maxRating: null,
+      minPopularity: null,
+      maxPopularity: null
+    },
+    disabled: true
   });
 
   private readonly subscription: Subscription = new Subscription();
@@ -79,15 +83,25 @@ export class ProductListPageComponent implements OnDestroy {
     private readonly productService: ProductService
   ) {
     this.subscription.add(
-      combineLatest([
-        this.productService.products$.pipe(
+      this.productService.products$
+        .pipe(
           filter((value: ProductModel[]): boolean => !!value) as OperatorFunction<ProductModel[] | null, ProductModel[]>
-        ),
+        )
+        .subscribe({
+          next: (products: ProductModel[]) => {
+            this.loading = false;
+            this.products.set(products);
+          }
+        })
+    );
+
+    this.subscription.add(
+      combineLatest([
         this.sortByFormControl.valueChanges.pipe(startWith(SortTypesEnum.Popularity)),
         this.orderByFormControl.valueChanges.pipe(startWith(OrderByTypesEnum.Descending))
       ]).subscribe({
-        next: ([products, sortBy, orderBy]: [ProductModel[], SortTypesEnum, string]) => {
-          const sortedProducts = products.sort((a, b) => this.sortProducts(a, b, sortBy));
+        next: ([sortBy, orderBy]: [SortTypesEnum, string]) => {
+          const sortedProducts = this.products().sort((a, b) => this.sortProducts(a, b, sortBy));
 
           if (orderBy === 'desc') {
             sortedProducts.reverse();
@@ -142,7 +156,15 @@ export class ProductListPageComponent implements OnDestroy {
         }
       })
       .afterClosed()
-      .subscribe((filterConfig: FilterFormModel) => this.filterFormControl.setValue(filterConfig));
+      .subscribe((filterConfig: FilterFormModel) => {
+        if (filterConfig) {
+          if (this.filterFormControl.disabled) {
+            this.filterFormControl.enable();
+          }
+
+          this.filterFormControl.setValue(filterConfig);
+        }
+      });
   };
 
   public readonly addToCart = (product: ProductModel): void => {
@@ -154,6 +176,19 @@ export class ProductListPageComponent implements OnDestroy {
         this.openCart();
       })
     );
+  };
+
+  public readonly cleanAllFilters = (): void => {
+    this.filterFormControl.setValue({
+      minPrice: null,
+      maxPrice: null,
+      minRating: null,
+      maxRating: null,
+      minPopularity: null,
+      maxPopularity: null
+    });
+
+    this.filterFormControl.disable();
   };
 
   private readonly sortProducts = (a: ProductModel, b: ProductModel, sortBy: SortTypesEnum): number => {

@@ -3,8 +3,17 @@
     <h2 class="page-title">Choose your favorite beers</h2>
     <h3 class="page-subtitle">We have the best beers of the world just waiting for you!</h3>
 
-    @if (products().length) {
+    @if (loading) {
+      <mat-spinner class="loading-spinner"></mat-spinner>
+    }
+
+    @if (!products().length && !loading) {
+      <p>No products found</p>
+    }
+
+    @if (!loading) {
       <div class="product-filter">
+        <button *ngIf="!filterFormControl.disabled" (click)="cleanAllFilters()" mat-button>Clean filters</button>
         <button
           (click)="openFilterConfiguratorDialog()"
           #tooltip="matTooltip"
@@ -70,8 +79,6 @@
           </mat-card>
         }
       </div>
-    } @else {
-      <mat-spinner class="loading-spinner"></mat-spinner>
     }
   </div>
 </div>

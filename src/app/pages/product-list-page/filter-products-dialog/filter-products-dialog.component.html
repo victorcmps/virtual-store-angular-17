@@ -78,7 +78,7 @@
 
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button (click)="cleanAllFilters()" mat-button>Clean filters</button>
+  
   <button
     [disabled]="!formGroup.dirty || formGroup.invalid"
     (click)="saveFilter()"

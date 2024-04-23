@@ -1,4 +1,4 @@
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, of, share } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,7 +15,7 @@ export class ProductService {
     public readonly snackBar: MatSnackBar,
     private readonly http: HttpClient
   ) {
-    this.products$ = this.http.get<ProductModel[]>('beers').pipe(catchError(this.handleGetProductsError));
+    this.products$ = this.http.get<ProductModel[]>('beers').pipe(share(), catchError(this.handleGetProductsError));
   }
 
   private readonly handleGetProductsError = (): Observable<null> => {

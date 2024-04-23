@@ -46,12 +46,12 @@ export class FilterProductsDialogComponent {
     private readonly formBuilder: FormBuilder
   ) {
     this.formGroup = this.formBuilder.group({
-      minPrice: [data.formGroup.minPrice ?? null, [Validators.min(0), Validators.max(100)]],
-      maxPrice: [data.formGroup.maxPrice ?? null, [Validators.min(0), Validators.max(100)]],
-      minRating: [data.formGroup.minRating ?? null, [Validators.min(0), Validators.max(5)]],
-      maxRating: [data.formGroup.maxRating ?? null, [Validators.min(0), Validators.max(5)]],
-      minPopularity: [data.formGroup.minPopularity ?? null, [Validators.min(0), Validators.max(5)]],
-      maxPopularity: [data.formGroup.maxPopularity ?? null, [Validators.min(0), Validators.max(5)]]
+      minPrice: [data?.formGroup?.minPrice ?? null, [Validators.min(0), Validators.max(100)]],
+      maxPrice: [data?.formGroup?.maxPrice ?? null, [Validators.min(0), Validators.max(100)]],
+      minRating: [data?.formGroup?.minRating ?? null, [Validators.min(0), Validators.max(5)]],
+      maxRating: [data?.formGroup?.maxRating ?? null, [Validators.min(0), Validators.max(5)]],
+      minPopularity: [data?.formGroup?.minPopularity ?? null, [Validators.min(0), Validators.max(5)]],
+      maxPopularity: [data?.formGroup?.maxPopularity ?? null, [Validators.min(0), Validators.max(5)]]
     });
   }
 
@@ -61,10 +61,5 @@ export class FilterProductsDialogComponent {
     }
 
     this.dialogRef.close(this.formGroup.value);
-  };
-
-  public readonly cleanAllFilters = (): void => {
-    this.formGroup.reset();
-    this.saveFilter();
   };
 }

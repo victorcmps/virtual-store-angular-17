@@ -228,6 +228,26 @@ describe('ProductListPageComponent', () => {
     });
   });
 
+  describe('cleanAllFilters', () => {
+    it('should reset form group and save filter', () => {
+      // Arrange
+      component.filterFormControl.setValue({
+        minPrice: 10,
+        maxPrice: 50,
+        minRating: 2,
+        maxRating: 4,
+        minPopularity: 1,
+        maxPopularity: 3
+      });
+
+      // Act
+      component.cleanAllFilters();
+
+      // Assert
+      expect(component.filterFormControl.disabled).toBeTruthy();
+    });
+  });
+
   describe('addToCart', () => {
     it('should add product to cart', () => {
       // Arrange

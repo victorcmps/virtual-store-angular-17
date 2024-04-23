@@ -228,7 +228,7 @@ describe('ProductListPageComponent', () => {
       expect(component.snackBar.open).toHaveBeenCalledWith('Products filtered.', 'Close', { duration: 3000 });
     });
 
-    it('should open filter configurator dialog and clean all filters when all filterFormControl values are empty or null', () => {
+    it('should open filter configurator dialog and reset all filters when all filterFormControl values are empty or null', () => {
       // Arrange
       spyOn(component.dialog, 'open').and.returnValue({
         afterClosed: () => of({ minPrice: null, maxPrice: null })
@@ -269,7 +269,7 @@ describe('ProductListPageComponent', () => {
     });
   });
 
-  describe('cleanAllFilters', () => {
+  describe('resetAllFilters', () => {
     it('should reset form group and save filter', () => {
       // Arrange
       component.filterFormControl.setValue({
@@ -282,7 +282,7 @@ describe('ProductListPageComponent', () => {
       });
 
       // Act
-      component.cleanAllFilters();
+      component.resetAllFilters();
 
       // Assert
       expect(component.filterFormControl.disabled).toBeTruthy();

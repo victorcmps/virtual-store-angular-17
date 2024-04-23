@@ -163,7 +163,7 @@ export class ProductListPageComponent implements OnDestroy {
             }
 
             if (Object.values(filterConfig).every((value) => value === null || value === '')) {
-              this.cleanAllFilters();
+              this.resetAllFilters();
               return;
             }
 
@@ -185,7 +185,7 @@ export class ProductListPageComponent implements OnDestroy {
     );
   };
 
-  public readonly cleanAllFilters = (): void => {
+  public readonly resetAllFilters = (): void => {
     this.filterFormControl.setValue({
       minPrice: null,
       maxPrice: null,

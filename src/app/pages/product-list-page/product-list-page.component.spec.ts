@@ -165,9 +165,6 @@ describe('ProductListPageComponent', () => {
     });
 
     it('should filter products', () => {
-      spyOn(component.snackBar, 'open').and.returnValue({
-        onAction: () => of({})
-      } as any);
       component.filterFormControl.setValue({
         minPrice: 1,
         maxPrice: 10,
@@ -181,7 +178,6 @@ describe('ProductListPageComponent', () => {
         { id: '2', name: 'Product B', price: 5, rating: 1, popularity: 4 },
         { id: '3', name: 'Product C', price: 10, rating: 2, popularity: 3 }
       ] as any);
-      expect(component.snackBar.open).toHaveBeenCalledWith('Products filtered.', 'Close', { duration: 3000 });
     });
   });
 
@@ -195,7 +191,7 @@ describe('ProductListPageComponent', () => {
 
       // Assert
       expect(component.dialog.open).toHaveBeenCalledWith(CartDialogComponent, {
-        width: '960px'
+        width: '480px'
       });
     });
   });
@@ -205,6 +201,10 @@ describe('ProductListPageComponent', () => {
       // Arrange
       spyOn(component.dialog, 'open').and.returnValue({
         afterClosed: () => of({ minPrice: 10, maxPrice: 100 })
+      } as any);
+
+      spyOn(component.snackBar, 'open').and.returnValue({
+        onAction: () => of({})
       } as any);
 
       // Act
@@ -225,6 +225,47 @@ describe('ProductListPageComponent', () => {
         }
       });
       expect(component.filterFormControl.value).toEqual({ minPrice: 10, maxPrice: 100 } as any);
+      expect(component.snackBar.open).toHaveBeenCalledWith('Products filtered.', 'Close', { duration: 3000 });
+    });
+
+    it('should open filter configurator dialog and clean all filters when all filterFormControl values are empty or null', () => {
+      // Arrange
+      spyOn(component.dialog, 'open').and.returnValue({
+        afterClosed: () => of({ minPrice: null, maxPrice: null })
+      } as any);
+
+      spyOn(component.snackBar, 'open').and.returnValue({
+        onAction: () => of({})
+      } as any);
+
+      // Act
+      component.openFilterConfiguratorDialog();
+
+      // Assert
+      expect(component.dialog.open).toHaveBeenCalledWith(FilterProductsDialogComponent, {
+        width: '600px',
+        data: {
+          formGroup: {
+            minPrice: null,
+            maxPrice: null,
+            minRating: null,
+            maxRating: null,
+            minPopularity: null,
+            maxPopularity: null
+          }
+        }
+      });
+      expect(component.filterFormControl.value).toEqual({
+        minPrice: null,
+        maxPrice: null,
+        minRating: null,
+        maxRating: null,
+        minPopularity: null,
+        maxPopularity: null
+      } as any);
+      expect(component.snackBar.open).toHaveBeenCalledWith('Product filters have been reset to default.', 'Close', {
+        duration: 3000
+      });
     });
   });
 

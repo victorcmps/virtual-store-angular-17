@@ -147,29 +147,31 @@ export class ProductListPageComponent implements OnDestroy {
   };
 
   public readonly openFilterConfiguratorDialog = (): void => {
-    this.dialog
-      .open(FilterProductsDialogComponent, {
-        width: '600px',
-        data: {
-          formGroup: this.filterFormControl.value
-        }
-      })
-      .afterClosed()
-      .subscribe((filterConfig: FilterFormModel) => {
-        if (filterConfig) {
-          if (this.filterFormControl.disabled) {
-            this.filterFormControl.enable();
+    this.subscription.add(
+      this.dialog
+        .open(FilterProductsDialogComponent, {
+          width: '600px',
+          data: {
+            formGroup: this.filterFormControl.value
           }
+        })
+        .afterClosed()
+        .subscribe((filterConfig: FilterFormModel) => {
+          if (filterConfig) {
+            if (this.filterFormControl.disabled) {
+              this.filterFormControl.enable();
+            }
 
-          if (Object.values(filterConfig).every((value) => value === null || value === '')) {
-            this.cleanAllFilters();
-            return;
+            if (Object.values(filterConfig).every((value) => value === null || value === '')) {
+              this.cleanAllFilters();
+              return;
+            }
+
+            this.filterFormControl.setValue(filterConfig);
+            this.snackBar.open('Products filtered.', 'Close', { duration: 3000 });
           }
-
-          this.filterFormControl.setValue(filterConfig);
-          this.snackBar.open('Products filtered.', 'Close', { duration: 3000 });
-        }
-      });
+        })
+    );
   };
 
   public readonly addToCart = (product: ProductModel): void => {

@@ -1,4 +1,4 @@
-import { Component, WritableSignal, computed, signal } from '@angular/core';
+import { Component, OnDestroy, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -17,13 +17,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './cart-dialog.component.html',
   styleUrl: './cart-dialog.component.scss'
 })
-export class CartDialogComponent {
+export class CartDialogComponent implements OnDestroy {
   public readonly cart: WritableSignal<CartItemModel[]> = signal([]);
-  public readonly totalValue = computed(() => this.cart().reduce((acc, item) => acc + item.price * item.quantity, 0));
+  public readonly totalValue: Signal<number> = computed(() => this.cart().reduce((acc, item) => acc + item.price * item.quantity, 0));
   private readonly subscription: Subscription = new Subscription();
 
   public constructor(
-    public dialogRef: MatDialogRef<CartDialogComponent>,
+    public readonly dialogRef: MatDialogRef<CartDialogComponent>,
     private readonly cartService: CartService,
     private readonly snackBar: MatSnackBar
   ) {
@@ -34,6 +34,10 @@ export class CartDialogComponent {
         }
       })
     );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public readonly addQuantity = (id: string): void => this.cartService.addProductQuantity(id);

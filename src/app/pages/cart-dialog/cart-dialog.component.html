@@ -2,10 +2,6 @@
   <h2 mat-dialog-title>Cart</h2>
 
   <mat-dialog-content>
-    @if (cart().length < 1) {
-      <p>The cart is empty.</p>
-    }
-
     @for (item of cart(); track item) {
       <div class="cart-item">
         <div class="cart-item__image">
@@ -47,6 +43,10 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
+    }
+
+    @empty {
+      <p>The cart is empty.</p>
     }
 
     <p class="cart-total-amount">Total amount: {{ totalValue() | currency }}</p>

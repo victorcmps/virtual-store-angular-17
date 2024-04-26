@@ -13,7 +13,7 @@
 
     @if (!loading) {
       <div class="product-filter">
-        <button *ngIf="!filterFormControl.disabled" (click)="cleanAllFilters()" mat-button>Reset filters</button>
+        <button *ngIf="!filterFormControl.disabled" (click)="resetAllFilters()" mat-button>Reset filters</button>
         <button
           (click)="openFilterConfiguratorDialog()"
           #tooltip="matTooltip"

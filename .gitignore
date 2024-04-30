@@ -29,7 +29,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-package.lock
+package-lock.json
 /.nx/cache
 /.angular/cache
 .sass-cache/
@@ -42,3 +42,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
